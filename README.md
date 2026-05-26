@@ -7,7 +7,7 @@ Codex tokens expire after roughly 8 days of inactivity. This repo runs Codex hea
 ## Schedule
 
 - `cron: "0 3 * * 1,4"` — Mondays and Thursdays at 03:00 UTC.
-- Manual: `gh workflow run "Refresh Codex auth.json" --repo cherianthomas/codex-tast-run`
+- Manual: `gh workflow run "Refresh Codex auth.json" --repo cherian/codex-tast-run`
 
 ## Required secrets
 
