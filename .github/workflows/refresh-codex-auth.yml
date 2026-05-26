@@ -23,7 +23,9 @@ jobs:
           CODEX_AUTH_JSON_BASE_64: ${{ secrets.CODEX_AUTH_JSON_BASE_64 }}
         run: |
           mkdir -p "$HOME/.codex"
-          printf '%s' "$CODEX_AUTH_JSON_BASE_64" | tr -d '\n\r ' | base64 -d > "$HOME/.codex/auth.json"
+          CLEAN=$(printf '%s' "$CODEX_AUTH_JSON_BASE_64" | tr -d '\n\r \t')
+          echo "secret length: ${#CLEAN} (mod4=$((${#CLEAN} % 4)))"
+          printf '%s' "$CLEAN" | base64 -d > "$HOME/.codex/auth.json"
           jq -r '.tokens.last_refresh // .last_refresh // "unknown"' "$HOME/.codex/auth.json" > /tmp/before_refresh
 
       - name: Install Codex CLI & enable user namespaces
