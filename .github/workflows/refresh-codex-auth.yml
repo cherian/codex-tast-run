@@ -71,6 +71,5 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           NEW_B64=$(base64 -w0 < "$HOME/.codex/auth.json")
-          printf '%s' "$NEW_B64" | gh secret set CODEX_AUTH_JSON_BASE_64 \
-            --repo "$REPO" --body -
-          echo "Updated CODEX_AUTH_JSON_BASE_64 in $REPO"
+          gh secret set CODEX_AUTH_JSON_BASE_64 --repo "$REPO" --body "$NEW_B64"
+          echo "Updated CODEX_AUTH_JSON_BASE_64 in $REPO (len=${#NEW_B64})"
